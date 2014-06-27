@@ -8,7 +8,7 @@ module Bullet
       end
 
       def body_with_caller
-        "#{body}\n#{call_stack_messages}"
+        markdown("#{body}\n#{call_stack_messages}")
       end
 
       def body
@@ -16,12 +16,12 @@ module Bullet
       end
 
       def title
-        "N+1 Query #{@path ? "in #{@path}" : 'detected'}"
+        markdown(("##")+"N+1 Query #{@path ? "in #{@path}" : 'detected'}")
       end
 
       protected
         def call_stack_messages
-          (['N+1 Query method call stack'] + @callers).join( "\n  " )
+          markdown((['N+1 Query method call stack'] + @callers).join( "\n  " ))
         end
     end
   end

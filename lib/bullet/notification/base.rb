@@ -36,7 +36,7 @@ module Bullet
       end
 
       def full_notice
-        [whoami, url, title, body_with_caller].compact.join("\n")
+        [url, title, body_with_caller].compact.join("\n")
       end
 
       def notify_inline
@@ -48,12 +48,11 @@ module Bullet
       end
 
       def short_notice
-        [whoami, url, title, body].compact.join("\n")
+        [url, title, body].compact.join("\n")
       end
 
       def notification_data
         {
-          :user => whoami,
           :url => url,
           :title => title,
           :body => body_with_caller,
@@ -67,7 +66,22 @@ module Bullet
       def hash
         klazz_associations_str.hash
       end
+      
+      class HTMLwithPygments < Redcarpet::Render::HTML
+        def block_code(code, language)
+          Pygments.highlight(code, :lexer => language)
+        end
+      end
 
+      def markdown(text)
+        renderer = HTMLwithPygments.new(hard_wrap: true)
+        options = {
+          :no_intra_emphasis => true,
+          :fenced_code_blocks => true
+        }
+        Redcarpet::Markdown.new(renderer, options).render(text).html_safe
+      end
+      
       protected
         def klazz_associations_str
           "  #{@base_class} => [#{@associations.map(&:inspect).join(', ')}]"

@@ -89,7 +89,7 @@ module Bullet
         require 'fileutils'
         root_path = "#{rails? ? Rails.root.to_s : Dir.pwd}"
         FileUtils.mkdir_p(root_path + '/log')
-        bullet_log_file = File.open("#{root_path}/log/bullet.log", 'a+')
+        bullet_log_file = File.open("#{root_path}/log/bullet.html", 'a+')
         bullet_log_file.sync = true
         UniformNotifier.customized_logger = bullet_log_file
       end
