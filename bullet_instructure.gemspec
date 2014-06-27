@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 require "bullet/version"
 
 Gem::Specification.new do |s|
-  s.name        = "bullet"
+  s.name        = "bullet_instructure"
   s.version     = Bullet::VERSION
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Richard Huang"]

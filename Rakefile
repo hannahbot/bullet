@@ -9,11 +9,11 @@ require "rspec/core/rake_task"
 require "bullet/version"
 
 task :build do
-  system "gem build bullet.gemspec"
+  system "gem build bullet_instructure.gemspec"
 end
 
 task :install => :build do
-  system "sudo gem install bullet-#{Bullet::VERSION}.gem"
+  system "sudo gem install bullet_instructure-#{Bullet::VERSION}.gem"
 end
 
 task :release => :build do
@@ -41,7 +41,7 @@ begin
   desc "Generate documentation for the plugin."
   Rake::RDocTask.new do |rdoc|
     rdoc.rdoc_dir = "rdoc"
-    rdoc.title = "bullet #{Bullet::VERSION}"
+    rdoc.title = "bullet_instructure #{Bullet::VERSION}"
     rdoc.rdoc_files.include("README*")
     rdoc.rdoc_files.include("lib/**/*.rb")
   end
