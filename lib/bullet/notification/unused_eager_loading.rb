@@ -6,7 +6,7 @@ module Bullet
       end
 
       def title
-        "Unused Eager Loading #{@path ? "in #{@path}" : 'detected'}"
+        markdown(("##")+("Unused Eager Loading #{@path ? "in #{@path}" : 'detected'}"))
       end
     end
   end

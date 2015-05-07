@@ -64,6 +64,15 @@ module Bullet
         klazz_associations_str.hash
       end
 
+      def markdown(text)
+        renderer = HTMLwithPygments.new(hard_wrap: true)
+          options = {
+          :no_intra_emphasis => true,
+          :fenced_code_blocks => true
+          }
+        Redcarpet::Markdown.new(renderer, options).render(text).html_safe
+      end
+
       protected
         def klazz_associations_str
           "  #{@base_class} => [#{@associations.map(&:inspect).join(', ')}]"

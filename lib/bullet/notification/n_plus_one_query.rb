@@ -12,7 +12,7 @@ module Bullet
       end
 
       def title
-        "N+1 Query #{@path ? "in #{@path}" : 'detected'}"
+        markdown(("##")+"N+1 Query #{@path ? "in #{@path}" : 'detected'}")
       end
 
       def notification_data
@@ -23,7 +23,7 @@ module Bullet
 
       protected
         def call_stack_messages
-          (['N+1 Query method call stack'] + @callers).join( "\n  " )
+          markdown((['N+1 Query method call stack'] + @callers).join( "\n  " ))
         end
     end
   end
