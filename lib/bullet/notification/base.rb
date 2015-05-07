@@ -1,3 +1,5 @@
+require 'redcarpet'
+
 module Bullet
   module Notification
     class Base
@@ -62,6 +64,12 @@ module Bullet
 
       def hash
         klazz_associations_str.hash
+      end
+
+      class HTMLwithPygments < Redcarpet::Render::HTML
+        def block_code(code, language)
+          Pygments.highlight(code, :lexer => language)
+        end
       end
 
       def markdown(text)
