@@ -38,4 +38,51 @@ describe Bullet, focused: true do
       end
     end
   end
+
+  describe '#start?' do
+    context 'when bullet is disabled' do
+      before(:each) do
+        Bullet.enable = false
+      end
+
+      it 'should not be started' do
+        expect(Bullet).not_to be_start
+      end
+    end
+  end
+
+  describe '#debug' do
+    before(:each) do
+      $stdout = StringIO.new
+    end
+
+    after(:each) do
+      $stdout = STDOUT
+    end
+
+    context 'when debug is enabled' do
+      before(:each) do
+        ENV['BULLET_DEBUG'] = 'true'
+      end
+
+      after(:each) do
+        ENV['BULLET_DEBUG'] = 'false'
+      end
+
+      it 'should output debug information' do
+        Bullet.debug('debug_message', 'this is helpful information')
+
+        expect($stdout.string)
+          .to eq("[Bullet][debug_message] this is helpful information\n")
+      end
+    end
+
+    context 'when debug is disabled' do
+      it 'should output debug information' do
+        Bullet.debug('debug_message', 'this is helpful information')
+
+        expect($stdout.string).to be_empty
+      end
+    end
+  end
 end

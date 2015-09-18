@@ -36,6 +36,9 @@ or add it into a Gemfile (Bundler):
 gem "bullet", :group => "development"
 ```
 
+**Note**: make sure `bullet` gem is added after activerecord (rails) and
+mongoid.
+
 ## Configuration
 
 Bullet won't do ANYTHING unless you tell it to explicitly. Append to
@@ -107,6 +110,22 @@ which come from outside your code. You can whitelist these to ignore them:
 Bullet.add_whitelist :type => :n_plus_one_query, :class_name => "Post", :association => :comments
 Bullet.add_whitelist :type => :unused_eager_loading, :class_name => "Post", :association => :comments
 Bullet.add_whitelist :type => :counter_cache, :class_name => "Country", :association => :cities
+```
+
+If you want to skip bullet in some specific controller actions, you can
+do like
+
+```ruby
+class ApplicationController < ActionController::Base
+  around_action :skip_bullet
+
+  def skip_bullet
+    Bullet.enable = false
+    yield
+  ensure
+    Bullet.enable = true
+  end
+end
 ```
 
 ## Log

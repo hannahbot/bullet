@@ -1,5 +1,14 @@
 # Next Release
 
+## 4.14.8
+
+* compatible with `composite_primary_keys` gem
+
+## 4.14.7
+
+* Fix AR 4.2 SingularAssociation#reader result can be nil
+* `perform_out_of_channel_notifications` should always be triggered
+
 ## 4.14.6
 
 * Fix false positive with `belongs_to` -> `belongs_to` for active\_record 4.2

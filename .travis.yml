@@ -1,3 +1,4 @@
+sudo: false
 language: ruby
 rvm:
   - 2.0
@@ -10,6 +11,7 @@ gemfile:
   - Gemfile.rails-3.2
   - Gemfile.rails-3.1
   - Gemfile.rails-3.0
+  - Gemfile.mongoid-5.0
   - Gemfile.mongoid-4.0
   - Gemfile.mongoid-3.1
   - Gemfile.mongoid-3.0
